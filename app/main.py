@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 from app.routers import chat, documents
 
@@ -19,7 +21,14 @@ app.add_middleware(
 app.include_router(documents.router)
 app.include_router(chat.router)
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 @app.get("/health", tags=["health"])
 async def health_check():
     return {"status": "ok"}
+
+
+@app.get("/", include_in_schema=False)
+async def serve_ui():
+    return FileResponse("static/index.html")
