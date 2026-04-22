@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Llama 3.1 RAG Chatbot</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="layout">
+
+    <!-- 왼쪽: 문서 관리 -->
+    <aside class="sidebar">
+      <h2 class="sidebar-title">문서 관리</h2>
+
+      <div class="upload-area" id="uploadArea">
+        <input type="file" id="fileInput" hidden
+          accept=".pdf,.docx,.doc,.xlsx,.xls,.hwp" />
+        <div class="upload-icon">📄</div>
+        <p>클릭하거나 파일을 드래그하세요</p>
+        <span class="upload-hint">PDF · DOCX · XLSX · HWP</span>
+      </div>
+      <div class="upload-progress" id="uploadProgress" hidden>
+        <div class="spinner"></div>
+        <span>업로드 중...</span>
+      </div>
+
+      <div class="doc-list" id="docList">
+        <p class="empty-msg" id="emptyMsg">업로드된 문서가 없습니다.</p>
+      </div>
+    </aside>
+
+    <!-- 오른쪽: 채팅 -->
+    <main class="chat-wrap">
+      <header class="chat-header">
+        <span class="header-title">🦙 Llama 3.1 RAG 채팅</span>
+        <button class="btn-new" id="btnNewChat">새 대화</button>
+      </header>
+
+      <div class="messages" id="messages">
+        <div class="msg assistant">
+          <div class="bubble">안녕하세요! 문서를 업로드한 뒤 질문해 주세요.</div>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <textarea id="userInput" placeholder="질문을 입력하세요..." rows="1"></textarea>
+        <button class="btn-send" id="btnSend">전송</button>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>
